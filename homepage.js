@@ -1,4 +1,5 @@
 var express = require("express");
+var fortune = require("./fortune");
 
 var app = express();
 
@@ -27,6 +28,22 @@ app.get('/about', function(req, res){
 
 app.get('/photo', function(req, res){
 	res.render('photo');
+});
+
+app.get('/contact', function(req, res){
+	res.render('contact');
+});
+
+app.get('/tours/hood-river', function(req, res){
+	res.render('tours/hood-river');
+});
+
+app.get('/tours/oregon-coast', function(req, res){
+	res.render('tours/oregon-coast');
+});
+
+app.get('/tours/request-group-rate', function(req, res){
+	res.render('tours/request-group-rate');
 });
 
 //static pages
