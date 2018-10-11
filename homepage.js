@@ -46,6 +46,18 @@ app.get('/tours/request-group-rate', function(req, res){
 	res.render('tours/request-group-rate');
 });
 
+app.get('/courses', function(req, res){
+	res.render('courses',{
+		courses: [
+			{ name: 'Advanced Programming', credits: '3', instructor: 'Mark Voortman', description: 'The course focuses on problem solving but with a much higher difficulty level. The students will be required to write programs that involve multiple units of organization, e.g., classes. Several advanced algorithms will be discussed and should be implemented by the students. Prerequisites: CMPS 260.' },
+			{ name: 'Web Application Development',credits: '3', instructor: 'Mark Voortman',  description: 'This course will provide a foundation in several facets of establishing and maintaining a website. This includes the latest advances in client side as well as server side technologies. The goal is to have students design, implement, and run advanced  web  applications.  It  will  also  cover  in  some  detail the  protocols  required  for  web  development.  Prerequisites:CMPS 261, CMPS 262.' },
+			{ name: 'Accounting I  (1st Term)',credits: '3', instructor: 'Cheryl Clark',  description: 'The basic principles and procedures for gathering, recording, summarizing and interpreting accounting data.' },
+			{ name: 'Accounting II (2nd Term)',credits: '3', instructor: 'Cheryl Clark',  description: 'General accounting principles, special procedures for manufacturing operations and analysis of financial and fund statements. Prerequisite: ACCT 101.' },
+			{ name: 'Corporate Finance',credits: '3', instructor: 'Joseph DeFazio',  description: 'The problems associated with the effective management of capital. Includes the development of corporations, legal aspects, securities market, and financial planning and development. Prerequisites: ACCT 210, MATH 175.' },
+		],
+	});
+});
+
 //static pages
 app.use(express.static(__dirname + '/public'));
 

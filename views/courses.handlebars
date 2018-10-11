@@ -1,0 +1,42 @@
+
+<style>
+h3 {
+  text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    font-size: 12px;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+</style>
+
+<h3>Current Courses</h3>
+
+<table>
+     <tr>
+       <th>Name</th>
+       <th>Credits</th>
+       <th>Description</th>
+       <th>Instructor</th>
+     </tr>
+    {{#each courses}}
+     <tr>
+       <td>{{name}}</td>
+       <td>{{credits}}</td>
+       <td>{{description}}</td>
+       <td>{{instructor}}</td>
+     </tr>
+    {{/each}}
+</table>
