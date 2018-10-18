@@ -16,6 +16,11 @@ app.use(function(req, res, next){
   next();
 });
 
+//static pages
+app.use(express.static(__dirname + '/public'));
+app.use(require('body-parser').urlencoded({ extended: true }));
+
+// routes //
 app.get('/', function(req, res){
 	res.render('home');
 });
@@ -58,8 +63,31 @@ app.get('/courses', function(req, res){
 	});
 });
 
-//static pages
-app.use(express.static(__dirname + '/public'));
+app.get('/contact-info', function(req, res){
+	res.render('contact-info', { csrf: "CSRF token goes here" });
+});
+
+app.post('/process', function(req, res){
+		if(req.xhr || req.accepts('json,html')==='json'){
+				// if there were an error, we would send { error: 'error description' }
+				res.send({
+					success: true,
+			//		message: req.body.email
+				});
+		// console.log('Name (from querystring): ' + req.query.form);
+		// console.log('CSRF token (from hidden form field): ' + req.body._csrf);
+				console.log('Name    : ' + req.body.name);
+				console.log('Email   : ' + req.body.email);
+				console.log('Comments: ' + req.body.comments);
+		} else {
+				// if there were an error, we would redirect to an error page
+				res.redirect(303, '/thank-you');
+		}
+});
+
+app.get('/thank-you', function(req, res){
+	res.render('thank-you');
+});
 
 // 404 catch-all handler (middleware)
 app.use(function(req, res, next){

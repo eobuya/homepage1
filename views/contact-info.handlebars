@@ -1,0 +1,85 @@
+<h2>Sign up for our newsletter to receive news and specials!</h2>
+
+<style>
+.formContainer {
+    border-radius: 10px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+#fieldName {
+    padding: 5px;
+    width: 20%;
+}
+input[type=submit] {
+    background-color: #438B9C;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+</style>
+
+<div class="formContainer">
+    <form class="form-horizontal newsletterForm" role="form"
+            action="/process?form=contact-info" method="POST">
+        <input type="hidden" name="_csrf" value="{{csrf}}">
+        <div class="form-group">
+            <label for="fieldName" class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" required
+                id="fieldName" name="name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fieldEmail" class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-4">
+                <input type="email" class="form-control" required
+                id="fieldName" name="email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fieldComments" class="col-sm-2 control-label">Comments</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control"
+                id="fieldName" name="comments">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-4">
+              <input type="submit" value="Submit">
+              <!--  <button type="submit" class="btn btn-default">Submit</button>-->
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('.newsletterForm').on('submit', function(evt){
+            evt.preventDefault();
+            var action = $(this).attr('action');
+            var $container = $(this).closest('.formContainer');
+            //extraction using below console.log()...see console
+            //console.log(JSON.stringify($(this).serialize()));
+            $.ajax({
+                url: action,
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(data){
+                  //extraction using below console.log()...see console
+                  //console.log(JSON.stringify(data));
+                    if(data.success){
+                        $container.html('<h2>Thank you for signing up.</h2>');
+                      } else {
+                        $container.html('There was a problem.');
+                      }
+                },
+                error: function(){
+                    $container.html('There was a problem.');
+                }
+            });
+        });
+    });
+</script>
